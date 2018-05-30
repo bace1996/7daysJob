@@ -9,6 +9,7 @@
 namespace App\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @MongoDB\Document
@@ -26,9 +27,46 @@ class Job
     protected $name;
 
     /**
+     * 一句话描述
      * @MongoDB\Field(type="string")
      */
-    protected $quests;
+    protected $slogan;
+
+    /**
+     * 岗位概述
+     * @MongoDB\Field(type="string")
+     */
+    protected $topic;
+
+    /**
+     * 岗位要求
+     * @MongoDB\Field(type="string")
+     */
+    protected $description;
+
+    /**
+     * 关联的问题
+     * @MongoDB\ReferenceMany(targetDocument="Quest", mappedBy="job")
+     */
+    protected $quests = Array();
+
+    /**
+     * @return mixed
+     */
+    public function getQuests()
+    {
+        return $this->quests;
+    }
+
+    /**
+     * @param mixed $quests
+     * @return Job
+     */
+    public function setQuests($quests)
+    {
+        $this->quests = $quests;
+        return $this;
+    }
 
     /**
      * @return mixed
@@ -36,16 +74,6 @@ class Job
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     * @return Job
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**
@@ -69,19 +97,56 @@ class Job
     /**
      * @return mixed
      */
-    public function getQuests()
+    public function getSlogan()
     {
-        return $this->quests;
+        return $this->slogan;
     }
 
     /**
-     * @param mixed $quests
+     * @param mixed $slogan
      * @return Job
      */
-    public function setQuests($quests)
+    public function setSlogan($slogan)
     {
-        $this->quests = $quests;
+        $this->slogan = $slogan;
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTopic()
+    {
+        return $this->topic;
+    }
+
+    /**
+     * @param mixed $topic
+     * @return Job
+     */
+    public function setTopic($topic)
+    {
+        $this->topic = $topic;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     * @return Job
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
 
 }

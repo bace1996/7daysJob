@@ -15,7 +15,11 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
 </head>
 <body>
 <div class="job-header">
@@ -59,85 +63,226 @@
                 </ul>
             </div>
         </div>
+    </nav>
 
-        <div class="container">
-            <div class="line-through-title"><h3>请选择应聘职位</h3></div>
-            <div class="select-jobs clearfix">
-                <table>
-                    <tbody>
-                    <tr class="department">
-                        <th class="col-xs-1">技术部</th>
-                        <td class="col-xs-11">
-                            <div class="col-md-4 col-sm-6 itembox">
-                                <div class="job-item" data-id="560c88b7652a0734118b456b" data-name="PHP工程师">
-                                    <img src="./【西洋汇 - 职位应聘】 全球时尚时尚电商服务平台_files/560c88b7652a0734118b456b">
-                                    <div class="job-detail">
-                                        <h5 class="job-item-title">PHP工程师</h5>
-                                        <p class="job-item-slogan">野路子也有春天</p>
-                                    </div>
+    <div class="container">
+        <div class="line-through-title"><h3>请选择应聘职位</h3></div>
+        <div class="select-jobs clearfix">
+            <table>
+                <tbody>
+                {#<pre>asdasd</pre>#}
+                <tr class="department">
+                    {{ jobs | raw }}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="job_apply_page" class="job-apply">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="on_click_job_apply_page()"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="job-name">职位应聘 <small></small></h4>
+                </div>
+                <div class="">
+                    <div class="arrow-tabs">
+                        <div class="tab-item-1" id="tab-item-1">
+                            <div class="step-name">职位描述</div>
+                        </div>
+                        <div class="tab-item-2">
+                            <div class="step-name">在线答题</div>
+                        </div>
+                        <div class="tab-item-3">
+                            <div class="step-name">填写简历</div>
+                        </div>
+                        <div class="tab-item-4 last">
+                            <div class="step-name">完成应聘</div>
+                        </div>
+                    </div>
+
+                    <div class="step-area desc" id="step-1">
+                        <div id="jobDescribe"></div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-primary btn-lg" onclick="to_step_2()">开始应聘</button>
+                        </div>
+                    </div>
+
+                    <div class="step-area questions" style="display: none" id="step-2">
+                        <h4>请就以下问题告诉我们您的想法，字数不限。所有问题都没有标准答案；如果您认为该题目对您太难，可以留空，点击保存放弃作答。</h4>
+                        <form id="questions" class="form-horizontal" method="POST" action="job/saveResume" enctype="multipart/form-data" novalidate="novalidate">
+                            <div class="questionsArea" id="questionsArea">
+
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-default btn-lg" onclick="to_step_1()">上一步</button>
+                                <button type="button" class="btn btn-primary btn-lg" onclick="to_step_3()">下一步</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="step-area information" style="display: none;" id="step-3">
+                        <h4>请填写您的基本资料</h4>
+                        <form id="resume" class="form-horizontal" method="POST" action="job/saveResume" enctype="multipart/form-data" novalidate="novalidate">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">
+                                    姓名
+                                </label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" type="text" name="name" placeholder="请输入真实姓名" required="required" aria-required="true">
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6 itembox">
-                                <div class="job-item" data-id="57b47677bb7a91e313943f65" data-name="前端工程师">
-                                    <img src="./【西洋汇 - 职位应聘】 全球时尚时尚电商服务平台_files/57b47677bb7a91e313943f65">
-                                    <div class="job-detail">
-                                        <h5>前端工程师</h5>
-                                        <p>精益求精的点滴构建乔布斯级产品</p>
-                                    </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">
+                                    性别
+                                </label>
+                                <div class="col-sm-5">
+                                    <label class="radio-inline"><input type="radio" name="gender" value="女" required="required" aria-required="true">女</label><label class="radio-inline"><input type="radio" name="gender" value="男" required="required" aria-required="true">男</label>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6 itembox">
-                                <div class="job-item" data-id="5af6cda6fba6c1444003ec2e" data-name="大数据（算法）工程师">
-                                    <img src="./【西洋汇 - 职位应聘】 全球时尚时尚电商服务平台_files/5af6cda6fba6c1444003ec2e">
-                                    <div class="job-detail">
-                                        <h5>大数据（算法）工程师</h5>
-                                        <p>机器学习与人工智能</p>
-                                    </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">
+                                    出生日期
+                                </label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" type="date" name="birth" required="required" aria-required="true">
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6 itembox">
-                                <div class="job-item" data-id="598e5d46bb7a91280351993b" data-name="Go工程师">
-                                    <img src="./【西洋汇 - 职位应聘】 全球时尚时尚电商服务平台_files/598e5d46bb7a91280351993b">
-                                    <div class="job-detail">
-                                        <h5>Go工程师</h5>
-                                        <p>新技术的应用舞台</p>
-                                    </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">
+                                    电话
+                                </label>
+                                <div class="col-sm-5">
+                                    <input class="form-control" type="text" name="tel" placeholder="您的常用手机" required="required" aria-required="true">
                                 </div>
                             </div>
-                            <div class="col-md-4 col-sm-6 itembox">
-                                <div class="job-item" data-id="593cee98bb7a91da32ca5e52" data-name="全栈工程师">
-                                    <img src="./【西洋汇 - 职位应聘】 全球时尚时尚电商服务平台_files/593cee98bb7a91da32ca5e52">
-                                    <div class="job-detail">
-                                        <h5>全栈工程师</h5>
-                                        <p>前后端+产品思维</p>
-                                    </div>
-                                </div>
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#邮箱#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<input type="email" name="email" placeholder="您的常用邮箱" class="form-control" required="required" email:"true"="" aria-required="true">#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#地址#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<input class="form-control" type="text" name="address" placeholder="您所在的城市" required="required" aria-required="true">#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#毕业年份#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<select name="graduate" class="form-control" required="required" aria-required="true"><option value="">--</option><option value="1996">1996</option><option value="1997">1997</option><option value="1998">1998</option><option value="1999">1999</option><option value="2000">2000</option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option></select>#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#统招学历#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<select name="edu" class="form-control" required="required" aria-required="true"><option value="">--</option><option value="中专">中学/中专</option><option value="大专">大专/高职</option><option value="三本">本科：三本</option><option value="二本">本科：二本</option><option value="一本">本科：一本</option><option value="硕士">硕士研究生</option><option value="博士">博士研究生</option></select>#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#学校#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<input class="form-control" type="text" name="school" placeholder="您所毕业的院校名称" required="required" aria-required="true">#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#专业#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<input class="form-control" type="text" name="major" placeholder="您的专业" required="required" aria-required="true">#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#应聘类型#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<label class="radio-inline"><input type="radio" name="fullTime" value="1" required="required" aria-required="true">全职</label><label class="radio-inline"><input type="radio" name="fullTime" value="0" required="required" aria-required="true">兼职</label><label class="radio-inline"><input type="radio" name="fullTime" value="2" required="required" aria-required="true">实习</label><label class="radio-inline"><input type="radio" name="fullTime" value="3" required="required" aria-required="true">合作</label>#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#自我定位#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<select name="level" class="form-control"><option value="">--</option><option value="trainee">培训生/实习生</option><option value="assistant">助理</option><option value="low_engineer">初级专员/工程师</option><option value="mid_engineer">中级专员/工程师</option><option value="high_engineer">高级专员/工程师</option><option value="manager">经理</option><option value="director">总监</option></select>#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#薪资要求#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<select name="salary" class="form-control"><option value="">--</option><option value="LOWEST">没所谓，看着给</option><option value="TALK">见面再谈</option><option value="INPUT">有所谓，我自己填</option></select>#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#来源#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<select name="heard_from" class="form-control" required="required" aria-required="true"><option value="">--</option><option value="lagou">拉勾</option><option value="zhilian">智联招聘</option><option value="51job">前程无忧</option><option value="douban">豆瓣</option><option value="boss">boss直聘</option><option value="other">其它</option></select>#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-2 col-sm-offset-2 control-label">#}
+                                    {#简历附件#}
+                                {#</label>#}
+                                {#<div class="col-sm-5">#}
+                                    {#<input type="file" name="file" class="form-control" required="required" aria-required="true">#}
+                                {#</div>#}
+                            {#</div>#}
+                            {#<hr>#}
+                            {#<div class="form-group">#}
+                                {#<label class="col-sm-12">自我介绍（告诉我们一个与众不同的你，将大大增加你的应聘成功机率）</label>#}
+                                {#<div class="col-sm-12">#}
+                                    {#<textarea placeholder="请在此输入您的答案" name="intro" required="required" aria-required="true"></textarea>#}
+                                {#</div>#}
+                            {#</div>#}
+                            <div class="text-center" style="margin-top: 30px">
+                                <button type="button" class="btn btn-default btn-lg" onclick="to_step_2()">上一步</button>
+                                {#<button type="submit" class="btn btn-primary btn-lg" id="submit-apply-btn">提交</button>#}
+                                <button type="button" class="btn btn-primary btn-lg" id="submit-apply-btn" onclick="submit_form()">提交</button>
                             </div>
-                            <div class="col-md-4 col-sm-6 itembox">
-                                <div class="job-item" data-id="5a47e911fba6c1026b63d4ce" data-name="测试工程师">
-                                    <img src="./【西洋汇 - 职位应聘】 全球时尚时尚电商服务平台_files/5a47e911fba6c1026b63d4ce">
-                                    <div class="job-detail">
-                                        <h5>测试工程师</h5>
-                                        <p>尖叫产品，质量第一</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-6 itembox">
-                                <div class="job-item" data-id="5424cb9704c8485777aef981" data-name="技术培训生">
-                                    <img src="./【西洋汇 - 职位应聘】 全球时尚时尚电商服务平台_files/5424cb9704c8485777aef981">
-                                    <div class="job-detail">
-                                        <h5>技术培训生</h5>
-                                        <p>有潜力的技术小飞鸟</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        </form>
+                    </div>
+
+                    <div class="step-area clearfix" style="display: none" id="step-4">
+                        <div class="alert alert-success clearfix" role="alert">
+                            <h4 class="text-center">恭喜，您已经完成了应聘！</h4>
+                            <small>
+                                1. 非常感谢您有意向加入我们的公司。我们希望整个应聘过程是简单而高效的，没有占用您的太多时间。<br>
+                                2. 我们的管理员已经收到您的应聘请求，并且将在最短时间内阅读您的简历和应聘，同时将给您作出EMail的初步回复。<br>
+                                3. 如果需要，我们还将邀请您到我们的公司进行面试，加深大家的了解。所以还敬请您保持手机和其它联系方式的畅通。<br>
+                                4. 在我们阅读您的简历之前，您仍然可以对您的回答及简历进行修改。随时登录西洋汇并再次进入此页面即可。<br>
+                                <br>
+                                祝您有愉快的一天。
+                                <span id="invoicing" class="pull-right"></span>
+                            </small>
+                        </div>
+
+                        <div class="text-center" style="margin-top: 20px">
+                            <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal" id="finish" onclick="on_click_job_apply_page()">完成应聘</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
 </div>
 </body>
 </html>

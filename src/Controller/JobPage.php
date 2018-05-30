@@ -8,6 +8,8 @@
 
 namespace App\Controller;
 
+use App\Document\Answer;
+use App\Document\Apply;
 use App\Document\Job;
 use App\Document\Quest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -20,7 +22,6 @@ class JobPage extends Controller
 {
 //    不忍直视的初始化数据方法
     /**
-     * @param Request $request
      * @Route("/init", name="init_db")
      * @return Response
      */
@@ -63,7 +64,6 @@ $usernames = array_column($users, \'username\');</pre>
 
     }
     /**
-     * @param Request $request
      * @Route("/job", name="job_index")
      * @return Response
      */
@@ -94,10 +94,27 @@ $usernames = array_column($users, \'username\');</pre>
      */
     public function saveResume(Request $request)
     {
-        // build the form ...
         $dm = $this->get('doctrine_mongodb')->getManager();
+        $apply = new Apply();
+        $apply->setName($request->request->get('name'));
+        $apply->setGender($request->request->get('gender'));
+        $apply->setBirth($request->request->get('birth'));
+        $apply->setTele($request->request->get('tel'));
+
+        $repository = $dm->getRepository('App\\Document\\Job');
+        $job = $repository->find($request->request->get('job_id'));
+        $apply->setJob($job);
+        foreach ($job->getQuests() as $quest){
+            $answer = new Answer();
+            $answer->setQuest($quest);
+            $answer->setApply($apply);
+            $answer->setAnswer($request->request->get($quest->getId()));
+            $apply->getAnswers()[] = $answer;
+            $dm->persist($answer);
+        }
+        $dm->persist($apply);
+        $dm->flush();
         return new Response('ok');
-        // render the template
     }
 
     /**
@@ -142,6 +159,7 @@ $usernames = array_column($users, \'username\');</pre>
             ));
             $index_number++;
         }
+        $content .= '<input type="hidden" name="job_id" value="' . $job_id . '" /> ';
         return new Response($content);
         // render the template
     }

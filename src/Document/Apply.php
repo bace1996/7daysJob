@@ -54,7 +54,7 @@ class Apply
 
     /**
      * 关联的回答
-     * @ORM\OneToMany(targetEntity="Answer", mappedBy="apply")
+     * @MongoDB\ReferenceMany(targetDocument="Answer", mappedBy="apply")
      */
     protected $answers = Array();
 

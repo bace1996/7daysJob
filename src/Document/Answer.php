@@ -34,6 +34,78 @@ class Answer
     protected $apply;
 
     /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     * @return Answer
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuest()
+    {
+        return $this->quest;
+    }
+
+    /**
+     * @param mixed $quest
+     * @return Answer
+     */
+    public function setQuest($quest)
+    {
+        $this->quest = $quest;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApply()
+    {
+        return $this->apply;
+    }
+
+    /**
+     * @param mixed $apply
+     * @return Answer
+     */
+    public function setApply($apply)
+    {
+        $this->apply = $apply;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    /**
+     * @param mixed $answer
+     * @return Answer
+     */
+    public function setAnswer($answer)
+    {
+        $this->answer = $answer;
+        return $this;
+    }
+
+    /**
      * 回答
      * @MongoDB\Field(type="string")
      */

@@ -50,10 +50,9 @@ function to_step_4(){
 };
 
 
-function submit_form() {
+function submit_form(job_id) {
     //我看官网每个问题都单独用JQ保存了，便于修改和保存，这边菜鸡先“一把梭”合并form提交了
     $('#questions :input').not(':submit').clone().hide().appendTo('#resume');
-
     $.ajax({
         url:'/job/saveResume',
         type:'post',

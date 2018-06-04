@@ -5,6 +5,10 @@ Yet another just-for-learning web application written in php.
  - 主要基于PHP7 / Symfony 4 / Doctrine-MongoDB-ODM / Jquery / Bootstrap
  - 整套东西都在虚拟机Fedora上用Phpstorm写的
  - 在开始之前需要访问下 `/init` 初始化一个示例数据，这个url只是方便部署环境插入测试数据，产品中不应当存在。
+ - 还要手填个求职申请。
+ - 访问`/admin`查看简历列表
+ - 访问`/job`查看岗位
+ - `/admin/apply/<apply_id>`想做成restful的，有点四不像了
 
 ## 已知缺陷
  - 申请页面弹出的下滑同台效果未实现
@@ -16,12 +20,16 @@ Yet another just-for-learning web application written in php.
  - 入门PHP / Symfony / Jquery / MongoDB
  - 重点看了看CSS Selector的使用，还是蛮好玩的
  - 看着这边获取数据库Manager实例的操作回想起之前Odoo的开发，终于理解了什么是控制反转和依赖注入
+ - 摸了Symfony的security，感觉还是很棒的，不用造什么轮子就可以接入db，sso,~~虽然我只用了个硬编码~~
 
 ## TODO
- - 应该还有个增删该查申请的界面，后面两天学校有安排，没法按时交卷了
+ - ~~应该还有个增删该查申请的界面，后面两天学校有安排，没法按时交卷了
     不过应该也快的，JQ异步加载已经摸到了，后台DB的CR已经实操了，主要的Many2one和One2many ODM使用也回了，UD也就没啥了
-    目测主要难点在登陆的token处理还有一些前端的交互逻辑，不过debug的时候看到symfony好像有自带的一套token管理
-
+    目测主要难点在登陆的token处理还有一些前端的交互逻辑，不过debug的时候看到symfony好像有自带的一套token管理~~
+ - 整个还是很简陋的，编辑完了建立不会跳转回原页面
+ - 建立列表搜索功能还没做，这个页面想结合ajax做成动态加载新数据的，目前要做只知道每次查找都刷新页面
+ - 
+ 
 ## 小结
     前面从环境到走通数据库弄了很久，大约两天。
     第三天主要在研究怎么把问题和个人信息两个form同时提交，一开始不知道用jquery，就直接暴力合并了。

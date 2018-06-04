@@ -3,10 +3,5 @@
     <b>{{index_number}}</b>
     {{description | raw}}
 </h5>
-    <textarea class="textarea" name="{{ quest_id }}" placeholder="请在此输入您的答案"></textarea>
-    {#<div class="operation">#}
-        {#<span class="save-tips" style="display: none;">请先保存你的答案</span>#}
-        {#<button name="fix" class="btn btn-warning" disabled="">修改</button>#}
-        {#<button name="save" class="btn btn-default">保存</button>#}
-    {#</div>#}
+    <textarea class="textarea" name="{{ quest_id }}" placeholder="请在此输入您的答案">{{ answer }}</textarea>
 </div>

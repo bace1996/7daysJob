@@ -47,6 +47,30 @@ class Apply
     protected $tele;
 
     /**
+     * 学历
+     * @MongoDB\Field(type="string")
+     */
+    protected $education;
+
+    /**
+     * @return mixed
+     */
+    public function getEducation()
+    {
+        return $this->education;
+    }
+
+    /**
+     * @param mixed $education
+     * @return Apply
+     */
+    public function setEducation($education)
+    {
+        $this->education = $education;
+        return $this;
+    }
+
+    /**
      * 申请的岗位
      * @MongoDB\ReferenceOne(targetDocument="Job")
      */
@@ -54,7 +78,7 @@ class Apply
 
     /**
      * 关联的回答
-     * @MongoDB\ReferenceMany(targetDocument="Answer", mappedBy="apply")
+     * @MongoDB\ReferenceMany(targetDocument="Answer", mappedBy="apply", cascade="DELETE")
      */
     protected $answers = Array();
 

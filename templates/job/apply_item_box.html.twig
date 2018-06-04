@@ -1,0 +1,10 @@
+<tr>
+    <th scope="row">{{ row_number }}</th>
+    <td>{{ name }}</td>
+    <td>{{ job_name }}</td>
+    <td>{{ tel }}</td>
+    <td>
+        <button id="edit" type="button" class="func-button btn btn-info" data-toggle="modal" data-target="" onclick="edit_apply('{{ apply_id }}')">Edit</button>
+        <button id="delete" type="button" class="func-button btn btn-danger" data-toggle="modal" data-target="" onclick="delete_apply('{{ apply_id }}')">Delete</button>
+    </td>
+</tr>

@@ -55,7 +55,7 @@ $usernames = array_column($users, \'username\');</pre>
 上面代码只有在PHP7才能执行成功。在PHP5下，试使用array_map函数来代替array_column函数来实现上面的功能从而得到相同的$usernames返回值。');
         $dm = $this->get('doctrine_mongodb')->getManager();
         $qb = $dm->createQueryBuilder('App\\Document\\Quest');
-        $job1->getQuests()[] = $quest1;
+        $job1->addQuest($quest1);
         $dm->persist($job1);
         $dm->persist($quest1);
         $dm->flush();
@@ -156,6 +156,7 @@ $usernames = array_column($users, \'username\');</pre>
                 'quest_id' => $quest->getId(),
                 'index_number' => $index_number,
                 'description' => str_replace('\n', '</br>', $quest->getDescription()),
+                'answer' => '',
             ));
             $index_number++;
         }

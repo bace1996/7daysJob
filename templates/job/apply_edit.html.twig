@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>西洋汇后台</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    {#不知道为啥这里写相对路径就从 /admin/apply/js/apply.js 去加载了#}
+    <link rel="stylesheet" href="http://127.0.0.1:8000/css/main.css">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/css/apply.css">
+    <script src="http://127.0.0.1:8000/js/apply.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <p>Edit Apply</p>
+        </div>
+        <form id="apply_form" action="/admin/apply/{{ apply_id }}" class="form-horizontal" method="post">
+            <row>
+                <div class="form-group">
+                    <label class="col-sm-2 col-sm-offset-2 control-label">
+                        姓名
+                    </label>
+                    <div class="col-sm-5">
+                        <input type="text" id="name" name="name" class="form-control" value="{{ name }}"></input>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-sm-offset-2 control-label">
+                        性别
+                    </label>
+                    <div class="col-sm-5">
+                        <select name="gender" class="form-control" value="{{ gender }}">
+                            <option value="male">男</option>
+                            <option value="female">女</option>
+                            <option value="others">其他</option>
+                        </select>
+                        {#<label class="radio-inline"><input type="radio" name="gender" value="女" required="required" aria-required="true">女</label><label class="radio-inline"><input type="radio" name="gender" value="男" required="required" aria-required="true">男</label>#}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-sm-offset-2 control-label">
+                        电话
+                    </label>
+                    <div class="col-sm-5">
+                        <input type="text" id="tel" name="tel" class="form-control" value="{{ tel }}"></input>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 col-sm-offset-2 control-label">
+                        学历
+                    </label>
+                    <div class="col-sm-5">
+                        <select name="education" class="form-control" value="{{ education }}">
+                            {#<option value="">--</option>#}
+                            <option value="trainee">初中</option>
+                            <option value="assistant">高中</option>
+                            <option value="low_engineer">中专</option>
+                            <option value="Bachelor">本科</option>
+                            <option value="master">硕士</option>
+                            <option value="doctor">博士</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-4">
+                        <button id="submit" class="btn btn-success" style="width:50%;" type="submit">Save</button>
+                    </div>
+                </div>
+            </row>
+
+            <row>
+                <div class="form-horizontal">
+                    <div class="questionsArea" id="questionsArea">
+                        {{ quests | raw }}
+                    </div>
+                </div>
+            </row>
+
+        </form>
+
+    </div>
+</body>
+</html>

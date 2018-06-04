@@ -68,6 +68,11 @@ class Job
         return $this;
     }
 
+    public function addQuest($quest)
+    {
+        $this->quests[] = $quest;
+        return $this;
+    }
     /**
      * @return mixed
      */
